@@ -14,8 +14,8 @@ export class Gobline {
 		this.tds[ind].classList.add('active');
 	}
 
-	set setRemoveGoblin(td: HTMLElement) {
-		td.classList.remove('active');
+	set setRemoveGoblin(td: any) {
+		if (td[0] !== undefined) td[0].classList.remove('active');
 	}
 
 	set setLiveCounter(int: number) {
@@ -30,7 +30,7 @@ export class Gobline {
 			this.setAppendGoblin = this.getRandom as number;
 			if (document.getElementsByClassName('active').length > 0) {
 				setTimeout(() => {
-					this.setRemoveGoblin = document.getElementsByClassName('active')[0] as HTMLTableCellElement;
+					this.setRemoveGoblin = document.getElementsByClassName('active');
 				}, 700);
 			}
 		}, 1700);
