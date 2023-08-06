@@ -1,3 +1,5 @@
+import { doc } from "prettier";
+
 const { Gobline } = require("./gobline.ts");
 
 
@@ -22,7 +24,14 @@ for (let i = 0; i < goblinClassActive.tds.length; i++) {
 		} else {
 			unladenClik++;
 			if (unladenClik === 5) {
+				const htmlH3Element = document.createElement('h3') as HTMLElement
+				htmlH3Element.innerHTML = 'The END';
+
 				clearInterval(liveGobline)
+				document.getElementsByClassName('table')[0].remove();
+
+				document.getElementById('game')?.insertAdjacentElement('beforeend', htmlH3Element)
+
 				return
 			}
 		}

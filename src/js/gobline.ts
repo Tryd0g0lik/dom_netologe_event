@@ -27,7 +27,6 @@ export class Gobline {
 	startGame() {
 
 		const liveGobline: any = setInterval(() => {
-
 			this.setAppendGoblin = this.getRandom as number;
 			if (document.getElementsByClassName('active').length > 0) {
 				setTimeout(() => {
