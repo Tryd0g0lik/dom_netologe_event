@@ -6,13 +6,10 @@ const { Hero } = require("./heros.ts");
 
 const tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLElement>;
 const goblin = new Hero(tds);
-let live = goblin.startGame();
-
-
+let live = goblin.startGame;
 
 let limit = 0
 let value = 0;
-
 
 const play = (e: MouseEvent) => {
 
@@ -21,11 +18,11 @@ const play = (e: MouseEvent) => {
 		value++;
 		limit = 0
 		clearInterval(live);
-		live = goblin.startGame()
+		live = goblin.startGame;
+
 	} else {
 		limit++;
 		if (limit === 5) {
-
 			const htmlH3Element = document.createElement('h3') as HTMLElement
 			htmlH3Element.innerHTML = 'The END';
 			document.documentElement.removeEventListener('click', play)
@@ -37,8 +34,11 @@ const play = (e: MouseEvent) => {
 			return
 		}
 	}
+
+	goblin.removing();
 }
 
 for (let i = 0; i < goblin.tds.length; i++) {
 	goblin.tds[i].addEventListener('click', play, true);
+
 }
