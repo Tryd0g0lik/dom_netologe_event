@@ -1,35 +1,35 @@
 import { doc } from "prettier";
 
-const { Gobline } = require("./gobline.ts");
+const { Hero } = require("./heros.ts");
 
 
 
+const tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLElement>;
+const goblin = new Hero(tds);
+let live = goblin.startGame();
 
-const goblinClassActive = new Gobline();
-let liveGobline = goblinClassActive.startGame();
 
 
-
-let unladenClik = 0
-let count = 0;
+let limit = 0
+let value = 0;
 
 
 const play = (e: MouseEvent) => {
 
 	if (e.target === document.querySelector('.active')) {
-		goblinClassActive.setLiveCounter = count;
-		count++;
-		unladenClik = 0
-		clearInterval(liveGobline);
-		liveGobline = goblinClassActive.startGame()
+		goblin.counts = value;
+		value++;
+		limit = 0
+		clearInterval(live);
+		live = goblin.startGame()
 	} else {
-		unladenClik++;
-		if (unladenClik === 5) {
+		limit++;
+		if (limit === 5) {
 
 			const htmlH3Element = document.createElement('h3') as HTMLElement
 			htmlH3Element.innerHTML = 'The END';
 			document.documentElement.removeEventListener('click', play)
-			clearInterval(liveGobline)
+			clearInterval(live)
 			document.getElementsByClassName('table')[0].remove();
 
 			document.getElementById('game')?.insertAdjacentElement('beforeend', htmlH3Element)
@@ -39,6 +39,6 @@ const play = (e: MouseEvent) => {
 	}
 }
 
-for (let i = 0; i < goblinClassActive.tds.length; i++) {
-	goblinClassActive.tds[i].addEventListener('click', play, true);
+for (let i = 0; i < goblin.tds.length; i++) {
+	goblin.tds[i].addEventListener('click', play, true);
 }

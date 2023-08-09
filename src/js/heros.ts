@@ -1,7 +1,7 @@
-export class Gobline {
+export class Hero {
 	tds: HTMLCollectionOf<HTMLElement>;
-	constructor() {
-		this.tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLElement>;
+	constructor(tds: HTMLCollectionOf<HTMLElement>) {
+		this.tds = tds;
 	}
 
 	get getRandom() {
@@ -9,16 +9,15 @@ export class Gobline {
 		return Math.floor(Math.random() * this.tds.length);
 	}
 
-	set setAppendGoblin(ind: number) {
-
+	set appendHero(ind: number) {
 		this.tds[ind].classList.add('active');
 	}
 
-	set setRemoveGoblin(td: any) {
+	set removeHero(td: any) {
 		if (td[0] !== undefined) td[0].classList.remove('active');
 	}
 
-	set setLiveCounter(int: number) {
+	set counts(int: number) {
 		//счетчик
 		const counter = document.querySelector('.counter .count span:last-of-type') as HTMLElement;
 		counter.innerHTML = String(int + 1);
@@ -26,15 +25,16 @@ export class Gobline {
 	}
 	startGame() {
 
-		const liveGobline: any = setInterval(() => {
-			this.setAppendGoblin = this.getRandom as number;
+		const liveGoblin: any = setInterval(() => { //убрать вложение.Сделать закрытие по клиеку
+			this.appendHero = this.getRandom as number;
 			if (document.getElementsByClassName('active').length > 0) {
 				setTimeout(() => {
-					this.setRemoveGoblin = document.getElementsByClassName('active');
+					this.removeHero = document.getElementsByClassName('active');
 				}, 700);
 			}
 		}, 1700);
-		return liveGobline
+
+		return liveGoblin
 	}
 
 }
